@@ -17,12 +17,18 @@ function toggleSidebar(){
   document.getElementById("sidebar").classList.toggle("show");
 }
 
+function closeSidebarMobile(){
+  if(window.innerWidth <= 768){
+    document.getElementById("sidebar").classList.remove("show");
+  }
+}
+
 function showSection(section){
   ["dashboardSection","settingsSection","subscriptionSection"].forEach(id=>{
-    document.getElementById(id).style.display="none";
+    document.getElementById(id).style.display = "none";
   });
 
-  document.getElementById(section).style.display="block";
+  document.getElementById(section).style.display = "block";
 
   dashBtn.classList.remove("active");
   setBtn.classList.remove("active");
@@ -31,6 +37,8 @@ function showSection(section){
   if(section==="dashboardSection") dashBtn.classList.add("active");
   if(section==="settingsSection") setBtn.classList.add("active");
   if(section==="subscriptionSection") subBtn.classList.add("active");
+
+  closeSidebarMobile();
 }
 
 function subscribe(type){
@@ -38,6 +46,7 @@ function subscribe(type){
   localStorage.setItem("plan", type);
   document.getElementById("currentPlan").innerText = type;
   alert("Subscribed to " + type + " plan!");
+  closeSidebarMobile();
 }
 
 function addTask(){
@@ -52,7 +61,7 @@ function addTask(){
 
 function renderTasks(){
   const list = document.getElementById("taskList");
-  list.innerHTML="";
+  list.innerHTML = "";
 
   tasks.forEach((task,index)=>{
     list.innerHTML += `
@@ -70,7 +79,7 @@ function renderTasks(){
 }
 
 function toggleTask(i){
-  tasks[i].done=!tasks[i].done;
+  tasks[i].done = !tasks[i].done;
   saveTasks();
   renderTasks();
 }
@@ -86,15 +95,15 @@ function saveTasks(){
 }
 
 function updateStats(){
-  const total=tasks.length;
-  const completed=tasks.filter(t=>t.done).length;
-  const pending=total-completed;
-  const progress=total?Math.round((completed/total)*100):0;
+  const total = tasks.length;
+  const completed = tasks.filter(t=>t.done).length;
+  const pending = total - completed;
+  const progress = total ? Math.round((completed/total)*100) : 0;
 
-  totalTasks.innerText=total;
-  completedTasks.innerText=completed;
-  pendingTasks.innerText=pending;
-  progressPercent.innerText=progress+"%";
+  totalTasks.innerText = total;
+  completedTasks.innerText = completed;
+  pendingTasks.innerText = pending;
+  progressPercent.innerText = progress + "%";
 }
 
 function updateClock(){
