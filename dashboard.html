@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - TaskFlow Pro</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div class="dashboard">
+  <aside class="sidebar" id="sidebar">
+    <div class="logo">TaskFlow Pro</div>
+
+    <ul class="menu">
+      <li onclick="showSection('dashboardSection')" class="active" id="dashBtn">
+        <i class="fa-solid fa-house"></i> Dashboard
+      </li>
+      <li onclick="showSection('settingsSection')" id="setBtn">
+        <i class="fa-solid fa-gear"></i> Settings
+      </li>
+      <li onclick="showSection('subscriptionSection')" id="subBtn">
+        <i class="fa-solid fa-crown"></i> Subscription
+      </li>
+    </ul>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <button class="menu-toggle" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+      <h2>TaskFlow Pro</h2>
+
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+        <div class="clock" id="clock"></div>
+        <div class="clock">👤 <span id="topUser"></span></div>
+      </div>
+    </header>
+
+    <!-- Dashboard -->
+    <section id="dashboardSection">
+      <section class="cards">
+        <div class="card blue"><h3>Total Tasks</h3><span id="totalTasks">0</span></div>
+        <div class="card green"><h3>Completed</h3><span id="completedTasks">0</span></div>
+        <div class="card orange"><h3>Pending</h3><span id="pendingTasks">0</span></div>
+        <div class="card purple"><h3>Progress</h3><span id="progressPercent">0%</span></div>
+      </section>
+
+      <section class="task-panel">
+        <div class="task-input">
+          <input type="text" id="taskInput" placeholder="Enter new task...">
+          <button onclick="addTask()">Add Task</button>
+        </div>
+        <ul id="taskList"></ul>
+      </section>
+    </section>
+
+    <!-- Settings -->
+    <section id="settingsSection" style="display:none">
+      <div class="task-panel">
+        <h2 style="margin-bottom:15px;">Personal Info</h2>
+        <p><strong>Username:</strong> <span id="profileName"></span></p>
+        <p style="margin:10px 0;"><strong>Status:</strong> Active User</p>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </div>
+    </section>
+
+    <!-- Subscription -->
+    <section id="subscriptionSection" style="display:none">
+      <div class="task-panel">
+        <h2 style="margin-bottom:15px;">Subscription Plans</h2>
+
+        <div class="cards">
+          <div class="card blue">
+            <h3>Free</h3>
+            <p>Basic task manager</p>
+            <span>₹0</span>
+          </div>
+
+          <div class="card purple">
+            <h3>Pro</h3>
+            <p>Unlimited tasks + Premium UI</p>
+            <span>₹99/mo</span>
+            <button style="margin-top:10px;width:100%;" onclick="subscribe('Pro')">Buy Pro</button>
+          </div>
+
+          <div class="card green">
+            <h3>Enterprise</h3>
+            <p>Team access + Reports</p>
+            <span>₹299/mo</span>
+            <button style="margin-top:10px;width:100%;" onclick="subscribe('Enterprise')">Buy</button>
+          </div>
+        </div>
+
+        <p style="margin-top:15px;">Current Plan: <strong id="currentPlan">Free</strong></p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="dashboard.js"></script>
+</body>
+</html>
